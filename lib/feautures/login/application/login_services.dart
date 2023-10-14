@@ -12,7 +12,7 @@ class AuthServices {
     final data = LoginModel.fromJson(jsonResponse).results;
     data?.forEach(
       (element) {
-        if (element.user == user && element.password == password) {
+        if (element.user == user.trim() && element.password == password.trim()) {
           result = true;
         }
       },

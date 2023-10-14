@@ -74,6 +74,9 @@ class _CardWidgetState extends State<CardWidget> {
                                           Text(e.user ?? ''),
                                           Text(e.court ?? ''),
                                           Text(e.date ?? ''),
+                                          Text(e.playType ?? ''),
+                                          Text(e.citie ?? ''),
+                                         
                                         ],
                                       ),
                                     ),

@@ -12,14 +12,14 @@ class WeatherMapServices {
     http.Response response = await http.get(Uri.parse(
         'http://api.openweathermap.org/data/2.5/forecast?q=$location&appid=$apiKey'));
 
-    var data = jsonDecode(response.body);
-    var long = data["city"]["coord"]["lon"];
-    var lant = data["city"]["coord"]["lat"];
+    final  data = jsonDecode(response.body);
+    final long = data["city"]["coord"]["lon"];
+    final lant = data["city"]["coord"]["lat"];
 
     http.Response responseRain = await http.get(Uri.parse(
         'https://api.openweathermap.org/data/2.5/weather?lat=$lant&lon=$long&appid=$apiKey'));
 
-    var dataRain = jsonDecode(responseRain.body);
+    final dataRain = jsonDecode(responseRain.body);
 
     rainProbability = dataRain["weather"].first["description"].toString();
 

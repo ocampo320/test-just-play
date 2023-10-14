@@ -7,8 +7,6 @@ import 'package:kncha_app/feautures/home/application/bloc/home_event.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_state.dart';
 import 'package:kncha_app/feautures/home/domain/models/court.dart';
 
-import 'home_state.dart';
-
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final CourtStore courtStore;
   int coutn = 0;
@@ -64,17 +62,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  Future<bool> isCourtAvailable(
-       String date, String nameCourt) async {
+  Future<bool> isCourtAvailable(String date, String nameCourt) async {
     final courts = await courtStore.findAll();
     bool isDateAvailable = false;
     courts.forEach(
       (r) {
-        if(r.isEmpty){
-           isDateAvailable = true;
-        }else{
-            r.forEach(
-          (court) {
+        if (r.isEmpty) {
+          isDateAvailable = true;
+        } else {
+          for (var court in r) {
             if (court.court == nameCourt && court.date == date) {
               if (court.count != null) {
                 if (court.count! >= 2) {
@@ -83,13 +79,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   isDateAvailable = true;
                 }
               }
-            }else{
-               isDateAvailable = true;
+            } else {
+              isDateAvailable = true;
             }
-          },
-        );
+          }
         }
-      
       },
     );
     return isDateAvailable;
@@ -100,17 +94,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     coutn = 0;
     courts.forEach(
       (r) {
-        r.forEach(
-          (element) {
-            if (element.court == nameCourt) {
-              if (element.count == null) {
-                element.count = 1;
-              } else {
-                coutn = element.count! + 1;
-              }
+        for (var element in r) {
+          if (element.court == nameCourt) {
+            if (element.count == null) {
+              element.count = 1;
+            } else {
+              coutn = element.count! + 1;
             }
-          },
-        );
+          }
+        }
       },
     );
     return coutn;
