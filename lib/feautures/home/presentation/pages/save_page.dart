@@ -1,6 +1,9 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:kncha_app/core/color_manager.dart';
+import 'package:kncha_app/core/utils/app_typography.dart';
+import 'package:kncha_app/core/widgets/button_just_play.dart';
 import 'package:kncha_app/core/widgets/input_just_play.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_bloc.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_event.dart';
@@ -11,6 +14,7 @@ import 'package:kncha_app/feautures/home/domain/services/cities_services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:kncha_app/feautures/home/presentation/widgets/drop_down_just_play.dart';
 
 class SavePage extends StatelessWidget {
   const SavePage({
@@ -21,8 +25,22 @@ class SavePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: const Icon(
+              Icons.keyboard_backspace_rounded,
+              color: Colors.white,
+            )),
+        backgroundColor: ColorManager.neutral600,
         centerTitle: true,
-        title: const Text('Agendar Cancha'),
+        title: Text(
+          'Agendar Cancha',
+          style: AppTypography.stRaleway(
+            color: ColorManager.neutralWhite,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: const SaveForm(),
     );
@@ -61,11 +79,24 @@ class _SaveFormState extends State<SaveForm> {
             child: Column(
               children: [
                 TextField(
+                  style: AppTypography.stRaleway(
+                    color: ColorManager.neutral600,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                   controller: dateInput,
                   //editing controller of this TextField
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
+                    hintStyle: AppTypography.stRaleway(
+                      color: ColorManager.neutral600,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
                     hintText: 'Fecha',
-                    suffixIcon: Icon(Icons.calendar_today),
+                    suffixIcon: Icon(
+                      Icons.calendar_today,
+                      color: ColorManager.neutral600,
+                    ),
                   ),
                   readOnly: true,
                   //set it true, so that user will not able to edit text
@@ -89,7 +120,7 @@ class _SaveFormState extends State<SaveForm> {
                   },
                 ),
                 InputJustPlay(
-                  
+                  textColor: ColorManager.neutral600,
                   onChanged: (v) {
                     setState(() {
                       validateButtom();
@@ -97,39 +128,14 @@ class _SaveFormState extends State<SaveForm> {
                   },
                   controller: userInput,
                   placeHolder: 'Nombre del responsable',
-                  
                 ),
                 SizedBox(
                   width: double.infinity,
-                  child: DropdownButtonFormField(
-                    onTap: () {
-                      setState(() {
-                        validateButtom();
-                      });
-                    },
-                    hint: const Text('Selecciona cancha'),
-                    // Down Arrow Icon
-                    icon: Row(
-                      children: const [
-                        Icon(Icons.keyboard_arrow_down),
-                      ],
-                    ),
-
-                    // Array list of items
-                    items: courts.map((items) {
-                      return DropdownMenuItem<String>(
-                        onTap: () {
-                          setState(() {
-                            validateButtom();
-                          });
-                        },
-                        value: items,
-                        child: Text(items),
-                      );
-                    }).toList(),
-                    // After selecting the desired option,it will
-                    // change button value to selected value
-                    onChanged: (String? newValue) {
+                  child: DropDownJustPlay(
+                    function: () => validateButtom(),
+                    item: courts,
+                    title: 'Selecciona cancha',
+                    onChange: (String? newValue) {
                       setState(() {
                         validateButtom();
                         courtInput.text = newValue ?? '';
@@ -138,132 +144,76 @@ class _SaveFormState extends State<SaveForm> {
                   ),
                 ),
                 SizedBox(
-                  width: double.infinity,
-                  child: DropdownButtonFormField(
-                    onTap: () {
-                      setState(() {
-                        validateButtom();
-                      });
-                    },
-                    hint: const Text('Tipo de juego'),
-                    // Down Arrow Icon
-                    icon: Row(
-                      children: const [
-                        Icon(Icons.keyboard_arrow_down),
-                      ],
-                    ),
-
-                    // Array list of items
-                    items: playType.map((items) {
-                      return DropdownMenuItem<String>(
-                        onTap: () {
-                          setState(() {
-                            validateButtom();
-                          });
-                        },
-                        value: items,
-                        child: Text(items),
-                      );
-                    }).toList(),
-                    // After selecting the desired option,it will
-                    // change button value to selected value
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        validateButtom();
-                        playInput.text = newValue ?? '';
-                      });
-                    },
-                  ),
-                ),
+                    width: double.infinity,
+                    child: DropDownJustPlay(
+                      function: () => validateButtom(),
+                      item: playType,
+                      title: 'Tipo de juego',
+                      onChange: (String? newValue) {
+                        setState(() {
+                          validateButtom();
+                          playInput.text = newValue ?? '';
+                        });
+                      },
+                    )),
                 SizedBox(
                   width: double.infinity,
                   child: FutureBuilder<List<Cities>>(
                       future: CitiesServices.getCities(),
                       builder: (context, listCities) {
                         return listCities.hasData
-                            ? DropdownButtonFormField(
-                                onTap: () {
-                                  setState(() {
-                                    validateButtom();
-                                  });
-                                },
-                                hint: const Text('Ciudad'),
-                                // Down Arrow Icon
-                                icon: Row(
-                                  children: const [
-                                    Icon(Icons.keyboard_arrow_down),
-                                  ],
-                                ),
-
-                                // Array list of items
-                                items: listCities.data!.map((items) {
-                                  return DropdownMenuItem<String>(
-                                    onTap: () {
-                                      setState(() {
-                                        validateButtom();
-                                      });
-                                    },
-                                    value: items.ciudades!.first,
-                                    child: Text(items.ciudades!.first),
-                                  );
-                                }).toList(),
-                                // After selecting the desired option,it will
-                                // change button value to selected value
-                                onChanged: (String? newValue) {
+                            ? DropDownJustPlay(
+                                function: () => validateButtom(),
+                                item: listCities.data![1].ciudades,
+                                title: 'Ciudad',
+                                onChange: (String? newValue) {
                                   setState(() {
                                     validateButtom();
                                     citieInput.text = newValue ?? '';
                                   });
                                 },
                               )
-                            : const Center(child: CircularProgressIndicator());
+                            : Center(
+                                child: CircularProgressIndicator(
+                                color: ColorManager.neutral600,
+                              ));
                       }),
                 ),
                 const SizedBox(
                   height: 25,
                 ),
-                SizedBox(
-                    width: double.infinity,
-                    child: validateButtom() == false
-                        ? ElevatedButton(
-                            onPressed: () async {
-                              var coutn = await context
-                                  .read<HomeBloc>()
-                                  .getCountAndSum(courtInput.text);
+                ButtonJustPlay(
+                  color: ColorManager.neutral600,
+                  colorText: Colors.white,
+                  fontSize: 16,
+                  onTap: validateButtom() == false
+                      ? () async {
+                          var coutn = await context
+                              .read<HomeBloc>()
+                              .getCountAndSum(courtInput.text);
 
-                              final vaialblecourt = await context
-                                  .read<HomeBloc>()
-                                  .isCourtAvailable(
-                                      dateInput.text, courtInput.text);
-                              if (vaialblecourt == false) {
-                                showAlertDialog(context);
-                              } else {
-                                context.read<HomeBloc>().add(SaveCourtStarted(
-                                    Court(
-                                        count: coutn,
-                                        court: courtInput.text,
-                                        date: dateInput.text,
-                                        user: userInput.text,
-                                        playType: playInput.text,
-                                        citie: citieInput.text)));
-                                Navigator.pop(context);
-                              }
-                            },
-                            child: const Text('Guardar'))
-                        : ElevatedButton(
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.resolveWith<Color?>(
-                                (Set<MaterialState> states) {
-                                  if (states.contains(MaterialState.disabled)) {
-                                    return Colors.grey;
-                                  }
-                                  return Colors.grey;
-                                },
-                              ),
-                            ),
-                            onPressed: () async {},
-                            child: const Text('Guardar')))
+                          final vaialblecourt = await context
+                              .read<HomeBloc>()
+                              .isCourtAvailable(
+                                  dateInput.text, courtInput.text);
+                          if (vaialblecourt == false) {
+                            showAlertDialog(context);
+                          } else {
+                            context.read<HomeBloc>().add(SaveCourtStarted(Court(
+                                count: coutn,
+                                court: courtInput.text,
+                                date: dateInput.text,
+                                user: userInput.text,
+                                playType: playInput.text,
+                                citie: citieInput.text)));
+                            Navigator.pop(context);
+                          }
+                        }
+                      : () {},
+                  title: "Guardar",
+                  width: double.infinity,
+                  height: 30,
+                )
               ],
             ),
           ),

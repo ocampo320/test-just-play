@@ -27,6 +27,8 @@ class _HomePageState extends State<HomePage> {
         );
     return Scaffold(
       floatingActionButton: FloatingActionButton(
+
+        backgroundColor: ColorManager.comentary03_900,
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const SavePage()),
@@ -34,6 +36,7 @@ class _HomePageState extends State<HomePage> {
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: 
         ColorManager.neutral600,
         title: Text(

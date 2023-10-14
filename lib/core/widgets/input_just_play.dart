@@ -11,7 +11,7 @@ class InputJustPlay extends StatelessWidget {
     this.onChanged,
     this.keyboard,
     this.validationText,
-    this.width,
+    this.width, this.textColor,
   }) : super(key: key);
 
   final String placeHolder;
@@ -21,6 +21,7 @@ class InputJustPlay extends StatelessWidget {
   final TextInputType? keyboard;
   final String? validationText;
   final double? width;
+  final Color  ?textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class InputJustPlay extends StatelessWidget {
             keyboardType: keyboard ?? TextInputType.text,
             textAlignVertical: TextAlignVertical.center,
             style: AppTypography.stRaleway(
-              color: ColorManager.neutralWhite,
+              color: textColor??ColorManager.neutralWhite,
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
@@ -61,7 +62,7 @@ class InputJustPlay extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(25)),
               ),
               hintStyle: AppTypography.stRaleway(
-                color: ColorManager.neutralWhite,
+                color: textColor??ColorManager.neutralWhite,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
