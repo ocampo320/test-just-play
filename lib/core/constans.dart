@@ -3,8 +3,8 @@ class Constants {
     static const errorConnecting ='Hubo un problema al conectarse al servidor. Inténtalo de nuevo.';
         static const errorNetwork = 'No tienes internet, verifica tu conexión.';
         static const l10n="l10n";
-        static const name="name";
-        static const password="password";
+        static const name="Nombre";
+        static const password="Contraseña";
         static const logIn="LogIn";
         static const iconImage="assets/icon.webp";
         static const mainImage="assets/fondo.webp";
