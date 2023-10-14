@@ -28,12 +28,9 @@ class MyApp extends StatelessWidget {
           ),
           
         ],
-        child: MaterialApp(
-          title: 'Library App',
-          theme: ThemeData(
-            primarySwatch: Colors.amber,
-          ),
-          home: const LoginScreen(),
+        child:const  MaterialApp(
+          title: 'Just play App',
+          home:  LoginScreen(),
         ),
       ),
     );

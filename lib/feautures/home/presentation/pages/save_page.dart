@@ -76,8 +76,10 @@ class _SaveFormState extends State<SaveForm> {
           key: _formKey,
           child: Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 25),
-            child: Column(
+            child: ListView(
+              
               children: [
+                   const SizedBox(height: 16,),
                 TextField(
                   style: AppTypography.stRaleway(
                     color: ColorManager.neutral600,
@@ -102,6 +104,7 @@ class _SaveFormState extends State<SaveForm> {
                   //set it true, so that user will not able to edit text
                   onTap: () async {
                     setState(() {
+                      
                       validateButtom();
                     });
 
@@ -119,7 +122,9 @@ class _SaveFormState extends State<SaveForm> {
                     } else {}
                   },
                 ),
+                   const SizedBox(height: 16,),
                 InputJustPlay(
+                  borderColor:ColorManager.neutral900 ,
                   textColor: ColorManager.neutral600,
                   onChanged: (v) {
                     setState(() {
@@ -129,6 +134,7 @@ class _SaveFormState extends State<SaveForm> {
                   controller: userInput,
                   placeHolder: 'Nombre del responsable',
                 ),
+                const SizedBox(height: 16,),
                 SizedBox(
                   width: double.infinity,
                   child: DropDownJustPlay(
@@ -143,6 +149,7 @@ class _SaveFormState extends State<SaveForm> {
                     },
                   ),
                 ),
+                   const SizedBox(height: 16,),
                 SizedBox(
                     width: double.infinity,
                     child: DropDownJustPlay(
@@ -156,6 +163,7 @@ class _SaveFormState extends State<SaveForm> {
                         });
                       },
                     )),
+                       const SizedBox(height: 16,),
                 SizedBox(
                   width: double.infinity,
                   child: FutureBuilder<List<Cities>>(

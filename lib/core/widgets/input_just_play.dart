@@ -11,7 +11,7 @@ class InputJustPlay extends StatelessWidget {
     this.onChanged,
     this.keyboard,
     this.validationText,
-    this.width, this.textColor,
+    this.width, this.textColor, this.borderColor,
   }) : super(key: key);
 
   final String placeHolder;
@@ -22,6 +22,7 @@ class InputJustPlay extends StatelessWidget {
   final String? validationText;
   final double? width;
   final Color  ?textColor;
+  final Color ?borderColor;
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +50,14 @@ class InputJustPlay extends StatelessWidget {
               contentPadding: const EdgeInsets.fromLTRB(12, 12, 0, 12), // Añade padding a la izquierda
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: ColorManager.neutralWhite,
+                  color:borderColor?? ColorManager.neutralWhite,
                   width: 1,
                 ),
                 borderRadius: const BorderRadius.all(Radius.circular(25)),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: ColorManager.comentary03_900,
+                  color:borderColor?? ColorManager.comentary03_900,
                   width: 1,
                 ),
                 borderRadius: const BorderRadius.all(Radius.circular(25)),
