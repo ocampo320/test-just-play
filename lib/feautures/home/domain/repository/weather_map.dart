@@ -1,5 +1,4 @@
 import 'package:kncha_app/core/failures/common_failure.dart';
-import 'package:kncha_app/feautures/home/domain/models/court.dart';
 import 'package:dartz/dartz.dart';
 import 'package:kncha_app/feautures/home/domain/services/weather_map_services.dart';
 class WeatherMap{

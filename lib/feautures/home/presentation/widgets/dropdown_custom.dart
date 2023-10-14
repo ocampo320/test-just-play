@@ -5,7 +5,6 @@ import 'package:kncha_app/core/platform_widget.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 
-const double _kPickerItemHeight = 32.0;
 
 class PlatformDropdownButton extends PlatformWidget<Widget, Widget> {
   final String? hint;
@@ -86,7 +85,7 @@ class PlatformDropdownButton extends PlatformWidget<Widget, Widget> {
                   padding: const EdgeInsets.only(left: 20, bottom: 5),
                   child: Text(
                     title ?? '',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               )
@@ -94,13 +93,13 @@ class PlatformDropdownButton extends PlatformWidget<Widget, Widget> {
                 padding: const EdgeInsets.only(left: 20, bottom: 5),
                 child: Text(
                   title ?? '',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
-        SizedBox(height: 4.0),
+        const SizedBox(height: 4.0),
         InkWell(
           onTap: onTap,
-          child: Container(
+          child: SizedBox(
             height: height ?? 48,
        
               child: Padding(
@@ -115,12 +114,12 @@ class PlatformDropdownButton extends PlatformWidget<Widget, Widget> {
                             ? Theme.of(context)
                                 .textTheme
                                 .subtitle1!
-                                .apply(color: Color.fromRGBO(0, 0, 0, 0.65))
+                                .apply(color: const Color.fromRGBO(0, 0, 0, 0.65))
                             : Theme.of(context).textTheme.subtitle1,
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.arrow_drop_down,
                       color: Colors.grey,
                     ),
@@ -137,36 +136,6 @@ class PlatformDropdownButton extends PlatformWidget<Widget, Widget> {
     );
   }
 
-  _showCupertinoPicker(BuildContext context, Function function) async {
-    var scrollController = FixedExtentScrollController(
-        initialItem: selectedIndex < 0 ? 0 : selectedIndex);
-    await showCupertinoModalPopup(
-      context: context,
-      builder: (context) {
-        return CupertinoActionSheet(
-          
-          actions: items.map((value) {
-            return CupertinoActionSheetAction(
-              onPressed: () {
-                Navigator.pop(context);
-
-                function();
-              },
-              child: Center(
-                  child: Text(
-                value!,
-                style: GoogleFonts.montserrat(
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 14,
-                ),
-              )),
-            );
-          }).toList(),
-        );
-      },
-    );
-  }
 
   void _showAlertDialog(BuildContext context, Function function) {
     showDialog(
@@ -190,7 +159,7 @@ class PlatformDropdownButton extends PlatformWidget<Widget, Widget> {
   }
 
   Widget _builtAlertDialogContent(Function function) {
-    return Container(
+    return SizedBox(
       width: 300.0,
       child: ListView.builder(
         shrinkWrap: true,

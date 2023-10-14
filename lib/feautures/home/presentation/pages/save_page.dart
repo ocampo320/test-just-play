@@ -1,14 +1,14 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
+import 'package:kncha_app/core/widgets/input_just_play.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_bloc.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_event.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_state.dart';
 import 'package:kncha_app/feautures/home/domain/models/cities.dart';
 import 'package:kncha_app/feautures/home/domain/models/court.dart';
 import 'package:kncha_app/feautures/home/domain/services/cities_services.dart';
-import 'package:kncha_app/feautures/home/presentation/widgets/dropdown_custom.dart';
-import 'package:kncha_app/feautures/home/presentation/widgets/textField_widget.dart';
 
-import '../../../../core/styles/styles.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
@@ -24,12 +24,14 @@ class SavePage extends StatelessWidget {
         centerTitle: true,
         title: const Text('Agendar Cancha'),
       ),
-      body: SaveForm(),
+      body: const SaveForm(),
     );
   }
 }
 
 class SaveForm extends StatefulWidget {
+  const SaveForm({super.key});
+
   @override
   _SaveFormState createState() => _SaveFormState();
 }
@@ -86,15 +88,16 @@ class _SaveFormState extends State<SaveForm> {
                     } else {}
                   },
                 ),
-                TextFormFieldCustom(
+                InputJustPlay(
+                  
                   onChanged: (v) {
                     setState(() {
                       validateButtom();
                     });
                   },
                   controller: userInput,
-                  hintText: 'Nombre del responsable',
-                  labelText: '',
+                  placeHolder: 'Nombre del responsable',
+                  
                 ),
                 SizedBox(
                   width: double.infinity,

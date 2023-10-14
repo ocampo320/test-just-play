@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 
 abstract class PlatformWidget<I extends Widget, A extends Widget>
     extends StatelessWidget {
+  const PlatformWidget({super.key});
+
   I createIosWidget(BuildContext context);
 
   A createAndroidWidget(BuildContext context);
@@ -22,7 +24,7 @@ abstract class PlatformWidget<I extends Widget, A extends Widget>
 class ErrorText extends StatefulWidget {
   final String? error;
 
-  ErrorText(this.error);
+  const ErrorText(this.error, {super.key});
 
   @override
   _ErrorTextState createState() => _ErrorTextState();
@@ -33,7 +35,7 @@ class _ErrorTextState extends State<ErrorText>
   @override
   Widget build(BuildContext context) {
     return AnimatedSize(
-      duration: Duration(milliseconds: 200),
+      duration: const Duration(milliseconds: 200),
       child: widget.error == null
           ? Container()
           : Padding(
@@ -56,7 +58,7 @@ const double _kPickerSheetHeight = 216.0;
 
 Widget buildBottomPicker(BuildContext context, Widget picker) {
   return SizedBox.fromSize(
-    size: Size(double.infinity, _kPickerContainerHeight),
+    size: const Size(double.infinity, _kPickerContainerHeight),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -65,7 +67,7 @@ Widget buildBottomPicker(BuildContext context, Widget picker) {
           child: Align(
             alignment: Alignment.centerRight,
             child: CupertinoButton(
-              child: Text('Aceptar'),
+              child: const Text('Aceptar'),
               onPressed: () {
                 Navigator.pop(context);
               },

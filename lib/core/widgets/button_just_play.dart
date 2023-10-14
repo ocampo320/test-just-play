@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kncha_app/core/color_manager.dart';
 import 'package:kncha_app/core/utils/app_typography.dart';
 
 class ButtonJustPlay extends StatelessWidget {
@@ -34,7 +33,7 @@ class ButtonJustPlay extends StatelessWidget {
         child: Center(
           child: Text(title,
               style: AppTypography.stRaleway(
-                  color: colorText??ColorManager.gradientsColorsPrimary011Opa100,
+                  color: colorText,
                   fontSize: 18,
                   fontWeight: FontWeight.bold)),
         ),

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kncha_app/core/color_manager.dart';
-import 'package:kncha_app/core/data/court_store.dart';
 import 'package:kncha_app/core/utils/app_typography.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_bloc.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_event.dart';
-import 'package:kncha_app/feautures/home/domain/models/court.dart';
 import 'package:kncha_app/feautures/home/presentation/pages/save_page.dart';
 import 'package:kncha_app/feautures/home/presentation/widgets/card_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

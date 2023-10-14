@@ -3,8 +3,8 @@ import 'package:kncha_app/core/color_manager.dart';
 import 'package:kncha_app/core/constans.dart';
 import 'package:kncha_app/core/widgets/button_just_play.dart';
 import 'package:kncha_app/core/widgets/input_just_play.dart';
-import 'package:kncha_app/feautures/home/presentation/pages/home_page.dart';
 import 'package:kncha_app/feautures/login/application/login_services.dart';
+import 'package:kncha_app/feautures/welcome/welcome.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -87,7 +87,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const HomePage(),
+                                  builder: (context) =>  const WelcomeScreen(),
                                 ),
                                 (Route<dynamic> route) => false,
                               );
