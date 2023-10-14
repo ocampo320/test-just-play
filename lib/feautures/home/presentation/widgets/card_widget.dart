@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kncha_app/core/color_manager.dart';
+import 'package:kncha_app/core/constans/color_manager.dart';
+import 'package:kncha_app/core/constans/constans.dart';
 import 'package:kncha_app/core/utils/app_typography.dart';
 import 'package:kncha_app/core/widgets/button_just_play.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_bloc.dart';
@@ -109,7 +110,7 @@ class _CardWidgetState extends State<CardWidget> {
                                         width: double.infinity,
                                         onTap: () =>
                                             showAlertDialog(context, e),
-                                        title: "Borrar el agendamiento",
+                                        title: Constants.deleteSchedule,
                                       )),
                                   const SizedBox(width: 8),
                                 ],
@@ -131,7 +132,7 @@ class _CardWidgetState extends State<CardWidget> {
 showAlertDialog(BuildContext context, Court e) {
   // set up the button
   Widget okButton = TextButton(
-    child: Text("Aceptar",
+    child: Text(Constants.accept,
         style: AppTypography.stRaleway(
           color: ColorManager.neutral900,
           fontSize: 18,
@@ -147,8 +148,8 @@ showAlertDialog(BuildContext context, Court e) {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    title: const Text("Alerta"),
-    content: const Text("Esta seguro de  borrar el agendamiento."),
+    title: const Text(Constants.attention),
+    content: const Text(Constants.areYouSure),
     actions: [
       okButton,
     ],

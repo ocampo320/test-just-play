@@ -1,7 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
-import 'package:kncha_app/core/color_manager.dart';
+import 'package:kncha_app/core/constans/color_manager.dart';
 import 'package:kncha_app/core/utils/app_typography.dart';
 import 'package:kncha_app/core/widgets/button_just_play.dart';
 import 'package:kncha_app/core/widgets/input_just_play.dart';

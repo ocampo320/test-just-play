@@ -1,11 +1,14 @@
+/// Este archivo contiene la implementación de la pantalla de inicio de sesión.
+
 import 'package:flutter/material.dart';
-import 'package:kncha_app/core/color_manager.dart';
-import 'package:kncha_app/core/constans.dart';
+import 'package:kncha_app/core/constans/color_manager.dart';
+import 'package:kncha_app/core/constans/constans.dart';
 import 'package:kncha_app/core/widgets/button_just_play.dart';
 import 'package:kncha_app/core/widgets/input_just_play.dart';
 import 'package:kncha_app/feautures/login/application/login_services.dart';
 import 'package:kncha_app/feautures/welcome/welcome.dart';
 
+/// Clase que representa la pantalla de inicio de sesión.
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -16,11 +19,14 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
+    // Controladores para los campos de usuario y contraseña
     TextEditingController user = TextEditingController();
     TextEditingController password = TextEditingController();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
+          // Decoración con una imagen de fondo
           decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage(Constants.mainImage),
@@ -80,6 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         title: Constants.logIn,
                         color: ColorManager.comentary03_900,
                         onTap: () {
+                          // Lógica de inicio de sesión
                           AuthServices.login(
                                   user.value.text, password.value.text)
                               .then((value) {
@@ -87,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>  const WelcomeScreen(),
+                                  builder: (context) => const WelcomeScreen(),
                                 ),
                                 (Route<dynamic> route) => false,
                               );
@@ -109,14 +116,15 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  /// Muestra un cuadro de diálogo de alerta con un mensaje dado.
   showAlertDialog(String message) {
-    // set up the AlertDialog
+    // Configura el AlertDialog
     AlertDialog alert = AlertDialog(
       title: const Center(child: Text(Constants.attention)),
       content: Text(message),
     );
 
-    // show the dialog
+    // Muestra el cuadro de diálogo
     showDialog(
       context: context,
       builder: (BuildContext context) {
