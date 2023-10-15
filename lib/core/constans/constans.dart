@@ -21,7 +21,7 @@ class Constants {
         static const areYouSure="Esta seguro de  borrar el agendamiento?";
         static const welcome="Bienvenido";
         static const enjoyThisApp="Espero disfrutes esta app";
-        static const deleteSchedule="Agenda de canchas";
+        static const deleteSchedule="Eliminar agenda";
         static const accept="Aceptar";
 
 }

@@ -36,7 +36,7 @@ class _CardWidgetState extends State<CardWidget> {
         return state.when(
             save: (b) => const SizedBox(),
             initial: () => const SizedBox(child: Center(child: Text('data'))),
-            loading: () => const CircularProgressIndicator(),
+            loading: () => const Center(child: CircularProgressIndicator(color: Colors.white,)),
             data: (data) => Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15, top: 25),
                   child: Column(

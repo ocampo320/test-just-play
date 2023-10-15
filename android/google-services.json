@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "831431121756",
+    "project_id": "just-play-dd779",
+    "storage_bucket": "just-play-dd779.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831431121756:android:37fb2c7e4aa7902ec73f99",
+        "android_client_info": {
+          "package_name": "com.example.kncha_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBf14eXDAiWYS-09616B0facCDiyqecHGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
