@@ -10,7 +10,7 @@ class Constants {
         static const mainImage="assets/fondo.webp";
         static const scheduleCourts="Agenda de canchas";
         static const nameResponsible="Name of person responsible";
-        static const selectCourt="'Selecciona cancha'";
+        static const selectCourt="Selecciona cancha";
         static const date="Fecha";
         static const schedule="Schedule";
         static const ok="Ok";

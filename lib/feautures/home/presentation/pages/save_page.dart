@@ -4,19 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:kncha_app/core/constans/color_manager.dart';
 import 'package:kncha_app/core/constans/constans.dart';
 import 'package:kncha_app/core/utils/app_typography.dart';
+import 'package:kncha_app/core/utils/utils.dart';
 import 'package:kncha_app/core/widgets/button_just_play.dart';
 import 'package:kncha_app/core/widgets/custom_buttom_bar.dart';
 import 'package:kncha_app/core/widgets/input_just_play.dart';
+import 'package:kncha_app/core/widgets/loading_txt_form.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_bloc.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_event.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_state.dart';
 import 'package:kncha_app/feautures/home/domain/models/cities.dart';
 import 'package:kncha_app/feautures/home/domain/models/court.dart';
+import 'package:kncha_app/feautures/home/domain/models/type_play.dart';
 import 'package:kncha_app/feautures/home/domain/services/cities_services.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:kncha_app/feautures/home/domain/services/type_courts_services.dart';
 import 'package:kncha_app/feautures/home/presentation/widgets/drop_down_just_play.dart';
+
+import '../../domain/models/type_courts.dart';
+import '../../domain/services/type_play_services.dart';
 
 class SavePage extends StatelessWidget {
   const SavePage({
@@ -26,9 +33,9 @@ class SavePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       bottomNavigationBar: const CustomBottomBar(
-                currentIndex: 0,
-              ),
+      bottomNavigationBar: const CustomBottomBar(
+        currentIndex: 0,
+      ),
       appBar: AppBar(
         leading: IconButton(
             onPressed: () => Navigator.pop(context),
@@ -61,8 +68,7 @@ class SaveForm extends StatefulWidget {
 
 class _SaveFormState extends State<SaveForm> {
   final _formKey = GlobalKey<FormState>();
-  List courts = ["Cancha grande", "Cancha media", "Cancha peque"];
-  List playType = ["Baloncesto", "béisbol", "básquetbol"];
+
   TextEditingController dateInput = TextEditingController(text: '');
   TextEditingController userInput = TextEditingController(text: '');
   TextEditingController courtInput = TextEditingController(text: '');
@@ -82,9 +88,10 @@ class _SaveFormState extends State<SaveForm> {
           child: Padding(
             padding: const EdgeInsets.only(left: 15, right: 15, top: 25),
             child: ListView(
-              
               children: [
-                   const SizedBox(height: 16,),
+                const SizedBox(
+                  height: 16,
+                ),
                 TextField(
                   style: AppTypography.stRaleway(
                     color: ColorManager.neutral600,
@@ -109,7 +116,6 @@ class _SaveFormState extends State<SaveForm> {
                   //set it true, so that user will not able to edit text
                   onTap: () async {
                     setState(() {
-                      
                       validateButtom();
                     });
 
@@ -127,9 +133,11 @@ class _SaveFormState extends State<SaveForm> {
                     } else {}
                   },
                 ),
-                   const SizedBox(height: 16,),
+                const SizedBox(
+                  height: 16,
+                ),
                 InputJustPlay(
-                  borderColor:ColorManager.neutral900 ,
+                  borderColor: ColorManager.neutral900,
                   textColor: ColorManager.neutral600,
                   onChanged: (v) {
                     setState(() {
@@ -139,36 +147,57 @@ class _SaveFormState extends State<SaveForm> {
                   controller: userInput,
                   placeHolder: Constants.nameSchedule,
                 ),
-                const SizedBox(height: 16,),
+                const SizedBox(
+                  height: 16,
+                ),
                 SizedBox(
                   width: double.infinity,
-                  child: DropDownJustPlay(
-                    function: () => validateButtom(),
-                    item: courts,
-                    title: Constants.selectCourt,
-                    onChange: (String? newValue) {
-                      setState(() {
-                        validateButtom();
-                        courtInput.text = newValue ?? '';
-                      });
-                    },
-                  ),
+                  child: FutureBuilder<List<TypeCourt>>(
+                      future: TypeCourtServices.getTypeCourts(),
+                      builder: (context, listCourts) {
+                        return listCourts.hasData
+                            ? DropDownJustPlay(
+                                function: () => validateButtom(),
+                                item: Utils.convertListToNames(
+                                    listCourts.data ?? []),
+                                title: Constants.selectCourt,
+                                onChange: (String? newValue) {
+                                  setState(() {
+                                    validateButtom();
+                                    courtInput.text = newValue ?? '';
+                                  });
+                                },
+                              )
+                            : const LoadingTxtForm();
+                      }),
                 ),
-                   const SizedBox(height: 16,),
+                const SizedBox(
+                  height: 16,
+                ),
                 SizedBox(
                     width: double.infinity,
-                    child: DropDownJustPlay(
-                      function: () => validateButtom(),
-                      item: playType,
-                      title: Constants.typePlay,
-                      onChange: (String? newValue) {
-                        setState(() {
-                          validateButtom();
-                          playInput.text = newValue ?? '';
-                        });
-                      },
-                    )),
-                       const SizedBox(height: 16,),
+                    child: FutureBuilder<List<TypePlay>>(
+                        future: TypePlayServices.getTypePlay(),
+                        builder: (context, listTypePlay) {
+                          return listTypePlay.hasData
+                              ? DropDownJustPlay(
+                                  function: () => validateButtom(),
+                                  item: Utils.convertListToNamesPlay(
+                                      listTypePlay.data ?? []),
+                                  title: Constants.typePlay,
+                                  onChange: (String? newValue) {
+                                    setState(() {
+                                      validateButtom();
+                                      playInput.text = newValue ?? '';
+                                    });
+                                  },
+                                )
+                              : const LoadingTxtForm();
+                          ;
+                        })),
+                const SizedBox(
+                  height: 16,
+                ),
                 SizedBox(
                   width: double.infinity,
                   child: FutureBuilder<List<Cities>>(
@@ -186,10 +215,7 @@ class _SaveFormState extends State<SaveForm> {
                                   });
                                 },
                               )
-                            : Center(
-                                child: CircularProgressIndicator(
-                                color: ColorManager.neutral600,
-                              ));
+                            : const LoadingTxtForm();
                       }),
                 ),
                 const SizedBox(
