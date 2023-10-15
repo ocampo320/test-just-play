@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kncha_app/core/constans/color_manager.dart';
 import 'package:kncha_app/core/constans/constans.dart';
-
+import 'package:kncha_app/feautures/profile/domain/models/user_profile.dart';
+import 'package:kncha_app/feautures/profile/profile_page.dart';
 
 class CustomBottomBar extends StatelessWidget {
   final int currentIndex;
@@ -25,7 +26,7 @@ class CustomBottomBar extends StatelessWidget {
       child: Container(
         height: 57,
         decoration: BoxDecoration(
-          color: ColorManager.neutral600,
+          color: ColorManager.textLightMedium,
         ),
         child: Wrap(
           runAlignment: WrapAlignment.spaceEvenly,
@@ -42,7 +43,6 @@ class CustomBottomBar extends StatelessWidget {
               2,
               context,
             ),
-            
           ],
         ),
       ),
@@ -58,11 +58,22 @@ class CustomBottomBar extends StatelessWidget {
         break;
       case 1:
         break;
+
       case 2:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProfilePage(
+              userProfile: UserProfile(
+                  name: "John Doe",
+                  email: "John Doe@hotmail.com",
+                  imageUrl:
+                      "https://westernfinance.org/wp-content/uploads/speaker-3-v2.jpg"),
+            ),
+          ),
+        );
         break;
       case 3:
-        Navigator.pushNamed(context, '/myAccountView');
-
         break;
     }
   }

@@ -4,7 +4,7 @@ class ValidatePasswordBloc {
   factory ValidatePasswordBloc() => _singleton;
 
   ValidatePasswordBloc._() {
-    _isObscureTextController.value = true;
+    _isObscureTextController.value = false;
   }
 
   static final ValidatePasswordBloc _singleton = ValidatePasswordBloc._();
@@ -19,5 +19,8 @@ class ValidatePasswordBloc {
     } else {
       _isObscureTextController.value = true;
     }
+  }
+  void dispose(){
+_isObscureTextController.close();
   }
 }

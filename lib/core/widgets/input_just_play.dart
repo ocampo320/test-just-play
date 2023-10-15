@@ -16,7 +16,7 @@ class InputJustPlay extends StatelessWidget {
     this.borderColor,
     this.showPassword,
     this.suffixIcon,
-    this.obscureText,
+    this.obscureText=false,
   }) : super(key: key);
 
   final String placeHolder;

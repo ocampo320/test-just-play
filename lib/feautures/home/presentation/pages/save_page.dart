@@ -193,7 +193,6 @@ class _SaveFormState extends State<SaveForm> {
                                   },
                                 )
                               : const LoadingTxtForm();
-                          ;
                         })),
                 const SizedBox(
                   height: 16,
@@ -251,7 +250,7 @@ class _SaveFormState extends State<SaveForm> {
                       : () {},
                   title: Constants.save,
                   width: double.infinity,
-                  height: 30,
+                  height: 50,
                 )
               ],
             ),

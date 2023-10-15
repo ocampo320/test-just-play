@@ -18,9 +18,16 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+@override
+  void initState() {
+    
+    super.initState();
+    ValidatePasswordBloc().setIsObscure(false);
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Controladores para los campos de usuario y contraseña
+   
     TextEditingController user = TextEditingController();
     TextEditingController password = TextEditingController();
 
@@ -96,11 +103,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         title: Constants.logIn,
                         color: ColorManager.comentary03_900,
                         onTap: () {
+                                 ValidatePasswordBloc().setIsObscure(false);
                           // Lógica de inicio de sesión
                           AuthServices.login(
                                   user.value.text, password.value.text)
                               .then((value) {
                             if (value) {
+                         
                               Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
