@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kncha_app/core/constans/color_manager.dart';
 import 'package:kncha_app/core/constans/constans.dart';
 import 'package:kncha_app/core/utils/app_typography.dart';
+import 'package:kncha_app/core/widgets/custom_buttom_bar.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_bloc.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_event.dart';
 import 'package:kncha_app/feautures/home/presentation/pages/save_page.dart';
@@ -51,7 +52,12 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: SafeArea(
+        
         child: Scaffold(
+          bottomNavigationBar: const CustomBottomBar(
+            
+                currentIndex: 0,
+              ),
           backgroundColor: ColorManager.neutral600,
           body: const SingleChildScrollView(
             child: CardWidget(),

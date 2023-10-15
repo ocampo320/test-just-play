@@ -2,8 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:kncha_app/core/constans/color_manager.dart';
+import 'package:kncha_app/core/constans/constans.dart';
 import 'package:kncha_app/core/utils/app_typography.dart';
 import 'package:kncha_app/core/widgets/button_just_play.dart';
+import 'package:kncha_app/core/widgets/custom_buttom_bar.dart';
 import 'package:kncha_app/core/widgets/input_just_play.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_bloc.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_event.dart';
@@ -24,6 +26,9 @@ class SavePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       bottomNavigationBar: const CustomBottomBar(
+                currentIndex: 0,
+              ),
       appBar: AppBar(
         leading: IconButton(
             onPressed: () => Navigator.pop(context),
@@ -34,7 +39,7 @@ class SavePage extends StatelessWidget {
         backgroundColor: ColorManager.neutral600,
         centerTitle: true,
         title: Text(
-          'Agendar Cancha',
+          Constants.scheduleCourts,
           style: AppTypography.stRaleway(
             color: ColorManager.neutralWhite,
             fontSize: 18,
@@ -94,7 +99,7 @@ class _SaveFormState extends State<SaveForm> {
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
-                    hintText: 'Fecha',
+                    hintText: Constants.date,
                     suffixIcon: Icon(
                       Icons.calendar_today,
                       color: ColorManager.neutral600,
@@ -132,7 +137,7 @@ class _SaveFormState extends State<SaveForm> {
                     });
                   },
                   controller: userInput,
-                  placeHolder: 'Nombre del responsable',
+                  placeHolder: Constants.nameSchedule,
                 ),
                 const SizedBox(height: 16,),
                 SizedBox(
@@ -140,7 +145,7 @@ class _SaveFormState extends State<SaveForm> {
                   child: DropDownJustPlay(
                     function: () => validateButtom(),
                     item: courts,
-                    title: 'Selecciona cancha',
+                    title: Constants.selectCourt,
                     onChange: (String? newValue) {
                       setState(() {
                         validateButtom();
@@ -155,7 +160,7 @@ class _SaveFormState extends State<SaveForm> {
                     child: DropDownJustPlay(
                       function: () => validateButtom(),
                       item: playType,
-                      title: 'Tipo de juego',
+                      title: Constants.typePlay,
                       onChange: (String? newValue) {
                         setState(() {
                           validateButtom();
@@ -173,7 +178,7 @@ class _SaveFormState extends State<SaveForm> {
                             ? DropDownJustPlay(
                                 function: () => validateButtom(),
                                 item: listCities.data![1].ciudades,
-                                title: 'Ciudad',
+                                title: Constants.citie,
                                 onChange: (String? newValue) {
                                   setState(() {
                                     validateButtom();
@@ -218,7 +223,7 @@ class _SaveFormState extends State<SaveForm> {
                           }
                         }
                       : () {},
-                  title: "Guardar",
+                  title: Constants.save,
                   width: double.infinity,
                   height: 30,
                 )

@@ -29,8 +29,10 @@ class MyApp extends StatelessWidget {
           
         ],
         child:const  MaterialApp(
+          
           title: 'Just play App',
           home:  LoginScreen(),
+          
         ),
       ),
     );

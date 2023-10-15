@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:kncha_app/core/constans/color_manager.dart';
 import 'package:kncha_app/core/constans/constans.dart';
+import 'package:kncha_app/core/widgets/application/validate_password_bloc.dart';
 import 'package:kncha_app/core/widgets/button_just_play.dart';
 import 'package:kncha_app/core/widgets/input_just_play.dart';
 import 'package:kncha_app/feautures/login/application/login_services.dart';
@@ -71,11 +72,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      InputJustPlay(
-                        isPassword: true,
-                        controller: password,
-                        placeHolder: Constants.password,
-                      ),
+                      StreamBuilder<bool>(
+                        initialData: false,
+                          stream: ValidatePasswordBloc().isObscureTextStream,
+                          builder: (context, snapsisObscureText) {
+                            return InputJustPlay(
+                              
+                              obscureText: snapsisObscureText.data ?? true,
+                              showPassword: () =>
+                                  ValidatePasswordBloc().setIsObscure(true),
+                              isPassword: true,
+                              controller: password,
+                              placeHolder: Constants.password,
+                            );
+                          }),
                       const SizedBox(
                         height: 70,
                       ),

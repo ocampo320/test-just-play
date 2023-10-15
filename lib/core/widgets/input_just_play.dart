@@ -11,7 +11,12 @@ class InputJustPlay extends StatelessWidget {
     this.onChanged,
     this.keyboard,
     this.validationText,
-    this.width, this.textColor, this.borderColor,
+    this.width,
+    this.textColor,
+    this.borderColor,
+    this.showPassword,
+    this.suffixIcon,
+    this.obscureText,
   }) : super(key: key);
 
   final String placeHolder;
@@ -21,8 +26,11 @@ class InputJustPlay extends StatelessWidget {
   final TextInputType? keyboard;
   final String? validationText;
   final double? width;
-  final Color  ?textColor;
-  final Color ?borderColor;
+  final Color? textColor;
+  final Color? borderColor;
+  final Function()? showPassword;
+  final Widget? suffixIcon;
+  final bool? obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -33,37 +41,50 @@ class InputJustPlay extends StatelessWidget {
           TextField(
             cursorColor: ColorManager.primary100,
             controller: controller,
-            obscureText: isPassword,
+            obscureText: obscureText??false,
             enableSuggestions: !isPassword,
             autocorrect: !isPassword,
             onChanged: onChanged,
             keyboardType: keyboard ?? TextInputType.text,
             textAlignVertical: TextAlignVertical.center,
             style: AppTypography.stRaleway(
-              color: textColor??ColorManager.neutralWhite,
+              color: textColor ?? ColorManager.neutralWhite,
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
+            
             decoration: InputDecoration(
+              suffixIconConstraints:
+                  const BoxConstraints(minHeight: 20, minWidth: 20),
+              suffixIcon: isPassword == true
+                  ? IconButton(
+                      icon: Icon(
+                        obscureText! ? Icons.visibility_off : Icons.visibility,
+                        color: Colors.grey, // Personalice el color del icono
+                      ),
+                      onPressed: showPassword,
+                    )
+                  : suffixIcon,
               fillColor: Colors.transparent,
               filled: true,
-              contentPadding: const EdgeInsets.fromLTRB(12, 12, 0, 12), // Añade padding a la izquierda
+              contentPadding: const EdgeInsets.fromLTRB(
+                  12, 12, 0, 12), // Añade padding a la izquierda
               enabledBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color:borderColor?? ColorManager.neutralWhite,
+                  color: borderColor ?? ColorManager.neutralWhite,
                   width: 1,
                 ),
                 borderRadius: const BorderRadius.all(Radius.circular(25)),
               ),
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color:borderColor?? ColorManager.comentary03_900,
+                  color: borderColor ?? ColorManager.comentary03_900,
                   width: 1,
                 ),
                 borderRadius: const BorderRadius.all(Radius.circular(25)),
               ),
               hintStyle: AppTypography.stRaleway(
-                color: textColor??ColorManager.neutralWhite,
+                color: textColor ?? ColorManager.neutralWhite,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
@@ -86,7 +107,8 @@ class InputJustPlay extends StatelessWidget {
                           child: Text(
                             validationText!,
                             style: AppTypography.stRaleway(
-                              color: ColorManager.gradientsColorsPrimary011Opa100,
+                              color:
+                                  ColorManager.gradientsColorsPrimary011Opa100,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),

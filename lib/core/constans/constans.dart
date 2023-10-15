@@ -5,13 +5,13 @@ class Constants {
         static const l10n="l10n";
         static const name="Nombre";
         static const password="Contraseña";
-        static const logIn="LogIn";
+        static const logIn="Ingresar";
         static const iconImage="assets/icon.webp";
         static const mainImage="assets/fondo.webp";
         static const scheduleCourts="Agenda de canchas";
         static const nameResponsible="Name of person responsible";
-        static const selectCourt="Select court";
-        static const date="date";
+        static const selectCourt="'Selecciona cancha'";
+        static const date="Fecha";
         static const schedule="Schedule";
         static const ok="Ok";
         static const error="Error";
@@ -23,5 +23,12 @@ class Constants {
         static const enjoyThisApp="Espero disfrutes esta app";
         static const deleteSchedule="Eliminar agenda";
         static const accept="Aceptar";
+        static const nameSchedule="Nombre del responsable";
+        static const typePlay="Tipo de juego";
+        static const citie="Ciudad";
+        static const save="Guardar";
+        static const favoriteHeartIcon = 'assets/icons/interface-favorite-heart.svg';
+        static const interfaceUserCircleIcon = 'assets/icons/interface-user-circle.svg';
+
 
 }
