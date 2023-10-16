@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kncha_app/core/data/court_store.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kncha_app/feautures/players/application/bloc/player_bloc.dart';
+import 'package:kncha_app/feautures/profile/domain/repository/player_repository.dart';
 
 import 'feautures/home/application/bloc/home_bloc.dart';
-import 'feautures/login/login_view.dart';
+import 'feautures/login/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,19 +22,21 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
           create: (context) => CourtStore(),
         ),
+        RepositoryProvider(
+          create: (context) => PlayerRepository(),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
           BlocProvider(
             create: (context) => HomeBloc(courtStore: CourtStore()),
           ),
-          
+          BlocProvider(create: (context) => PlayerBloc(PlayerRepository())),
         ],
-        child:const  MaterialApp(
-          
+        child: const MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'Just play App',
-          home:  LoginScreen(),
-          
+          home: LoginScreen(),
         ),
       ),
     );

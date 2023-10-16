@@ -7,7 +7,7 @@ import 'package:kncha_app/core/widgets/application/validate_password_bloc.dart';
 import 'package:kncha_app/core/widgets/button_just_play.dart';
 import 'package:kncha_app/core/widgets/input_just_play.dart';
 import 'package:kncha_app/feautures/login/application/login_services.dart';
-import 'package:kncha_app/feautures/welcome/welcome.dart';
+import 'package:kncha_app/feautures/welcome/welcome_screen.dart';
 
 /// Clase que representa la pantalla de inicio de sesión.
 class LoginScreen extends StatefulWidget {

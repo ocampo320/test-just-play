@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:kncha_app/core/constans/color_manager.dart';
-import 'package:kncha_app/core/constans/constans.dart';
 import 'package:kncha_app/core/utils/app_typography.dart';
 import 'package:kncha_app/core/widgets/button_just_play.dart';
-import 'package:kncha_app/feautures/login/login_view.dart';
+import 'package:kncha_app/feautures/login/login_screen.dart';
 import 'package:kncha_app/feautures/profile/presentation/widgets/card_account.dart';
 
 import 'domain/models/user_profile.dart';
@@ -11,14 +10,9 @@ import 'domain/models/user_profile.dart';
 class ProfilePage extends StatelessWidget {
   final UserProfile userProfile;
 
-  const ProfilePage({required this.userProfile});
+  const ProfilePage({super.key, required this.userProfile});
 
-  void _logout() {
-    // Aquí puedes implementar la lógica para cerrar la sesión del usuario
-    // Por ejemplo, borrar el token de autenticación y redirigir al usuario a la pantalla de inicio de sesión.
-    // Esto dependerá de cómo manejas la autenticación en tu aplicación.
-    print('Sesión cerrada');
-  }
+ 
 
   @override
   Widget build(BuildContext context) {

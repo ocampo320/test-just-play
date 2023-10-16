@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kncha_app/core/constans/color_manager.dart';
 import 'package:kncha_app/core/constans/constans.dart';
 import 'package:kncha_app/core/utils/app_typography.dart';
-import 'package:kncha_app/feautures/home/presentation/pages/home_page.dart';
+import 'package:kncha_app/feautures/home/presentation/pages/home_screen.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 class WelcomeScreen extends StatefulWidget {

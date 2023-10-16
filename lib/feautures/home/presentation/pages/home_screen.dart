@@ -5,7 +5,7 @@ import 'package:kncha_app/core/utils/app_typography.dart';
 import 'package:kncha_app/core/widgets/custom_buttom_bar.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_bloc.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_event.dart';
-import 'package:kncha_app/feautures/home/presentation/pages/save_page.dart';
+import 'package:kncha_app/feautures/home/presentation/pages/save_screen.dart';
 import 'package:kncha_app/feautures/home/presentation/widgets/card_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,8 +27,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // Inicia un evento en el bloc de Home cuando se construye la pantalla.
     context.read<HomeBloc>().add(
-      HomeStarted(),
-    );
+          HomeStarted(),
+        );
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -52,12 +52,10 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       body: SafeArea(
-        
         child: Scaffold(
           bottomNavigationBar: const CustomBottomBar(
-            
-                currentIndex: 0,
-              ),
+            currentIndex: 0,
+          ),
           backgroundColor: ColorManager.neutral600,
           body: const SingleChildScrollView(
             child: CardWidget(),

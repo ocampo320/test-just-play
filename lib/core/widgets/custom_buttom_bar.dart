@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kncha_app/core/constans/color_manager.dart';
 import 'package:kncha_app/core/constans/constans.dart';
+import 'package:kncha_app/feautures/players/player_screen.dart';
 import 'package:kncha_app/feautures/profile/domain/models/user_profile.dart';
-import 'package:kncha_app/feautures/profile/profile_page.dart';
+import 'package:kncha_app/feautures/profile/profile_screen.dart';
 
 class CustomBottomBar extends StatelessWidget {
   final int currentIndex;
@@ -57,6 +58,12 @@ class CustomBottomBar extends StatelessWidget {
       case 0:
         break;
       case 1:
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const PlayerScreen(),
+          ),
+        );
         break;
 
       case 2:
