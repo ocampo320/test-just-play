@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kncha_app/core/constans/color_manager.dart';
 import 'package:kncha_app/core/utils/app_typography.dart';
 import 'package:kncha_app/core/widgets/button_just_play.dart';
+import 'package:kncha_app/core/widgets/custom_buttom_bar.dart';
 import 'package:kncha_app/feautures/login/login_screen.dart';
 import 'package:kncha_app/feautures/profile/presentation/widgets/card_account.dart';
 
@@ -17,6 +18,9 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: const CustomBottomBar(
+            currentIndex: 2,
+          ),
       backgroundColor: ColorManager.neutral600,
       appBar: AppBar(
         leading: IconButton(

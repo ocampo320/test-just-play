@@ -121,45 +121,59 @@ class CustomBottomBar extends StatelessWidget {
   ///
   /// Args:
   ///   index (int): the index of the item in the list
-  Color _getBgColor(int index) => currentIndex == index
-      ? ColorManager.neutral50
-      : ColorManager.comentary01_200;
+Color _getBgColor(int index) {
+  if (currentIndex == index) {
+    // Cambia el color de fondo cuando está seleccionado
+    return Colors.blue; // Puedes usar el color que desees
+  } else {
+    return Colors.white; // Color de fondo cuando no está seleccionado
+  }
+}
 
-  /// It returns a widget that is a SizedBox with a width of 1/4 of the screen width. The SizedBox
-  /// contains an InkWell that contains a Column. The Column contains an SvgPicture and a Text. The
-  /// SvgPicture is the icon and the Text is the text below the icon. The SvgPicture and Text are
-  /// colored based on the index of the icon. The InkWell is tapped to change the index of the icon.
-  ///
-  /// Args:
-  ///   assetName (String): The name of the asset to be displayed.
-  ///   text (String): The text to be displayed below the icon.
-  ///   index (int): The index of the item tapped.
-  ///   context (BuildContext): The context of the widget.
-  Widget _buildIcon(
-    String assetName,
-    int index,
-    BuildContext context,
-  ) =>
-      SizedBox(
-        width: MediaQuery.of(context).size.width / 4,
-        child: InkWell(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _svgPicture(assetName, color: _getBgColor(index)),
-            ],
+Widget _buildIcon(
+  String assetName,
+  int index,
+  BuildContext context,
+) =>
+  SizedBox(
+    width: MediaQuery.of(context).size.width / 4,
+    child: InkWell(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 7),
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: _getBgColor(index),
+                width: 2.0, // Grosor del borde
+              ),
+              borderRadius: const BorderRadius.all(Radius.circular(26)),
+              color: Colors.transparent, // Fondo transparente
+            ),
+            child: Transform.scale(
+              scale: currentIndex == index ? 1.02 : 1.0, // Escala 2% más grande cuando está seleccionado
+              child: SvgPicture.asset(
+                assetName,
+                width: 24,
+                height: 24,
+                color: _getBgColor(index), // Cambia el color del ícono a tu preferencia
+              ),
+            ),
           ),
-          onTap: () async {
-            if (hasGoBackModal) {
-              goBackModal!(context).then((exit) {
-                if (exit != null && exit) {
-                  _onItemTapped(context, index);
-                }
-              });
-            } else {
+        ],
+      ),
+      onTap: () async {
+        if (hasGoBackModal) {
+          goBackModal!(context).then((exit) {
+            if (exit != null && exit) {
               _onItemTapped(context, index);
             }
-          },
-        ),
-      );
+          });
+        } else {
+          _onItemTapped(context, index);
+        }
+      },
+    ),
+  );
 }

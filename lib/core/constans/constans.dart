@@ -38,4 +38,5 @@ class Constants {
   static const weight = 'Peso:';
   static const kg = 'kg';
   static const cm = 'cm';
+  static const addText = '! Debe agendar una cancha, preciona el boton de agragar para continuar ! (+)';
 }

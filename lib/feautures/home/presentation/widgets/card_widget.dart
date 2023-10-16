@@ -36,8 +36,13 @@ class _CardWidgetState extends State<CardWidget> {
         return state.when(
             save: (b) => const SizedBox(),
             initial: () => const SizedBox(child: Center(child: Text('data'))),
-            loading: () => const Center(child: CircularProgressIndicator(color: Colors.white,)),
-            data: (data) => Padding(
+            loading: () => const Center(
+                    child: CircularProgressIndicator(
+                  color: Colors.white,
+                )),
+            data: (data) {
+              if (data.isNotEmpty) {
+                return Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15, top: 25),
                   child: Column(
                     children: data
@@ -120,7 +125,28 @@ class _CardWidgetState extends State<CardWidget> {
                         )
                         .toList(),
                   ),
-                ),
+                );
+              } else {
+                return Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Text(
+                        Constants.addText,
+                          style: AppTypography.stRaleway(
+                            color: ColorManager.neutralWhite,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            },
             error: (error) {
               return Text(error.message);
             });

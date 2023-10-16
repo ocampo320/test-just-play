@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kncha_app/core/constans/color_manager.dart';
 import 'package:kncha_app/core/constans/constans.dart';
 import 'package:kncha_app/core/utils/app_typography.dart';
+import 'package:kncha_app/core/widgets/custom_buttom_bar.dart';
 import 'package:kncha_app/core/widgets/loading_txt_form.dart';
 import 'package:kncha_app/feautures/players/presentation/widgets/player_card.dart';
 
@@ -19,6 +20,9 @@ class PlayerScreen extends StatelessWidget {
     return BlocBuilder<PlayerBloc, PlayerState>(builder: (context, state) {
       return state.when(
         data: (data) => Scaffold(
+          bottomNavigationBar: const CustomBottomBar(
+            currentIndex: 1,
+          ),
           backgroundColor: ColorManager.neutral600,
           appBar: AppBar(
             centerTitle: true,

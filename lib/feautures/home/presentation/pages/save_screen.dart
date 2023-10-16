@@ -155,20 +155,25 @@ class _SaveFormState extends State<SaveForm> {
                   child: FutureBuilder<List<TypeCourt>>(
                       future: TypeCourtServices.getTypeCourts(),
                       builder: (context, listCourts) {
-                        return listCourts.hasData
-                            ? DropDownJustPlay(
-                                function: () => validateButtom(),
-                                item: Utils.convertListToNames(
-                                    listCourts.data ?? []),
-                                title: Constants.selectCourt,
-                                onChange: (String? newValue) {
-                                  setState(() {
-                                    validateButtom();
-                                    courtInput.text = newValue ?? '';
-                                  });
-                                },
-                              )
-                            : const LoadingTxtForm();
+                        if (listCourts.hasData) {
+                          return DropDownJustPlay(
+                            function: () => validateButtom(),
+                            item:
+                                Utils.convertListToNames(listCourts.data ?? []),
+                            title: Constants.selectCourt,
+                            onChange: (String? newValue) {
+                              setState(() {
+                                validateButtom();
+                                courtInput.text = newValue ?? '';
+                              });
+                            },
+                          );
+                        } else if (listCourts.connectionState ==
+                            ConnectionState.waiting) {
+                          return const LoadingTxtForm();
+                        } else {
+                          return const Text(Constants.errorConnecting);
+                        }
                       }),
                 ),
                 const SizedBox(
@@ -179,20 +184,25 @@ class _SaveFormState extends State<SaveForm> {
                     child: FutureBuilder<List<TypePlay>>(
                         future: TypePlayServices.getTypePlay(),
                         builder: (context, listTypePlay) {
-                          return listTypePlay.hasData
-                              ? DropDownJustPlay(
-                                  function: () => validateButtom(),
-                                  item: Utils.convertListToNamesPlay(
-                                      listTypePlay.data ?? []),
-                                  title: Constants.typePlay,
-                                  onChange: (String? newValue) {
-                                    setState(() {
-                                      validateButtom();
-                                      playInput.text = newValue ?? '';
-                                    });
-                                  },
-                                )
-                              : const LoadingTxtForm();
+                          if (listTypePlay.hasData) {
+                            return DropDownJustPlay(
+                              function: () => validateButtom(),
+                              item: Utils.convertListToNamesPlay(
+                                  listTypePlay.data ?? []),
+                              title: Constants.typePlay,
+                              onChange: (String? newValue) {
+                                setState(() {
+                                  validateButtom();
+                                  playInput.text = newValue ?? '';
+                                });
+                              },
+                            );
+                          } else if (listTypePlay.connectionState ==
+                              ConnectionState.waiting) {
+                            return const LoadingTxtForm();
+                          } else {
+                            return const Text(Constants.errorConnecting);
+                          }
                         })),
                 const SizedBox(
                   height: 16,

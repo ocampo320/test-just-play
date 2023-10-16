@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kncha_app/core/constans/color_manager.dart';
 import 'package:kncha_app/core/constans/constans.dart';
 import 'package:kncha_app/core/utils/app_typography.dart';
@@ -7,9 +8,7 @@ import 'package:kncha_app/feautures/home/application/bloc/home_bloc.dart';
 import 'package:kncha_app/feautures/home/application/bloc/home_event.dart';
 import 'package:kncha_app/feautures/home/presentation/pages/save_screen.dart';
 import 'package:kncha_app/feautures/home/presentation/widgets/card_widget.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// Clase que representa la pantalla principal (home) de la aplicación.
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -17,27 +16,42 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
+  late AnimationController _controller;
+
   @override
   void initState() {
     super.initState();
+
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    )..repeat(reverse: true);
+
+    context.read<HomeBloc>().add(
+          HomeStarted(),
+        );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // Inicia un evento en el bloc de Home cuando se construye la pantalla.
-    context.read<HomeBloc>().add(
-          HomeStarted(),
-        );
-
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: ColorManager.comentary03_900,
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const SavePage()),
+      floatingActionButton: ScaleTransition(
+        scale: Tween(begin: 1.0, end: 1.1).animate(_controller),
+        child: FloatingActionButton(
+          backgroundColor: ColorManager.comentary03_900,
+          onPressed: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const SavePage()),
+          ),
+          child: const Icon(Icons.add),
         ),
-        child: const Icon(Icons.add),
       ),
       appBar: AppBar(
         centerTitle: true,
